@@ -1,7 +1,7 @@
 <div class="page-builder">
     <div class="url-copy">
-        <input class="url-text" [value]="this.generatedUrl" disabled />
-        <button class="url-button" (click)="copyToClipboard()">COPY</button>
+        <input class="url-text" [value]="this.generatedUrl?? ''" disabled />
+        <button class="url-button" (click)="copyToClipboard()">{{lg.copyButton}}</button>
     </div>
     <div class="segments">
         <div class="segment" #leftSide>
@@ -12,7 +12,9 @@
             <div *ngIf="error">
                 {{error}}
             </div>
-            DATA OUTPUT
+            <div *ngIf="corsError" [innerHTML]="lg.corsError">
+            </div>
+
             <div>
                 <ngx-json-viewer *ngIf="this.jsonResult" [json]="this.jsonResult"></ngx-json-viewer>
             </div>

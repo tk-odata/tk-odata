@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BaseFilterDirective, FilterObj } from '../base-filter.directive';
 import { Filter, AndFilter, OrFilter } from 'src/app/services/query-generator/filters';
+import { ALanguage } from 'src/app/services/language';
+import { LanguageFactory } from 'src/app/services/language-factory.service';
 
 export class CompObj extends FilterObj {
   override createFilter(): Filter | null {
@@ -35,7 +37,18 @@ export class CompObj extends FilterObj {
   styleUrls: ['./comp-filter.component.css']
 })
 export class CompFilterComponent extends BaseFilterDirective<CompObj> implements OnInit {
+  lg: ALanguage;
+  options: { val: string; label: string; }[];
 
+  constructor(lFactory: LanguageFactory) {
+    super();
+    this.lg = lFactory.getLanguageService();
+
+    this.options = [
+      { val: "AND", label: this.lg.compAND },
+      { val: "OR", label: this.lg.compOR },
+    ]
+  }
   ngOnInit(): void {
   }
 

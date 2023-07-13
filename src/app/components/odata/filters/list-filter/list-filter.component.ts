@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BaseFilterDirective, FilterObj } from '../base-filter.directive';
 import { QbTableComponent, RelationOption } from '../../qb-table/qb-table.component';
 import { AllCriteria, AnyCriteria, Filter } from 'src/app/services/query-generator/filters';
+import { ALanguage } from 'src/app/services/language';
+import { LanguageFactory } from 'src/app/services/language-factory.service';
 
 export class ListObj extends FilterObj {
   override createFilter(): Filter | null {
@@ -15,7 +17,7 @@ export class ListObj extends FilterObj {
       return new AnyCriteria(this.selectedRelation.name, filter);
     }
   }
-  type: string = "ALL";
+  type: string = "ANY";
   selectedRelation!: RelationOption;
   listFilter?: FilterObj;
   table!: QbTableComponent;
@@ -28,6 +30,19 @@ export class ListObj extends FilterObj {
 })
 export class ListFilterComponent extends BaseFilterDirective<ListObj> implements OnInit {
 
+  lg: ALanguage;
+  options: { val: string; label: string; }[];
+
+  constructor(private lFactory: LanguageFactory) {
+    super();
+    this.lg = lFactory.getLanguageService();
+
+    this.options = [
+      { val: "ANY", label: this.lg.listOptionAny },
+      { val: "ALL", label: this.lg.listOptionAll }
+    ]
+  }
+
   ngOnInit(): void {
     if (this.filterObj.selectedRelation == null) {
       this.filterObj.selectedRelation = this.getListRelations()[0];
@@ -35,7 +50,7 @@ export class ListFilterComponent extends BaseFilterDirective<ListObj> implements
     }
   }
   setRelationTable() {
-    const component = new QbTableComponent();
+    const component = new QbTableComponent(this.lFactory);
     component.entity = this.filterObj.selectedRelation.type
     component.setTable()
     this.filterObj.table = component;

@@ -4,6 +4,8 @@ import { CritObj } from '../filters/crit-filter/crit-filter.component';
 import { CompObj } from '../filters/comp-filter/comp-filter.component';
 import { ListObj } from '../filters/list-filter/list-filter.component';
 import { NotObj } from '../filters/not-filter/not-filter.component';
+import { ALanguage } from 'src/app/services/language';
+import { LanguageFactory } from 'src/app/services/language-factory.service';
 
 @Component({
   selector: 'app-add-filter',
@@ -14,8 +16,11 @@ export class AddFilterComponent implements OnInit {
 
   @Output() newFilter = new EventEmitter<FilterObj>();
   selectedFilter = "0";
-  constructor() { }
+  lg: ALanguage;
 
+  constructor(lFactory: LanguageFactory) {
+    this.lg = lFactory.getLanguageService();
+  }
   ngOnInit(): void {
   }
 

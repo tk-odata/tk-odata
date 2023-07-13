@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { catchError, of } from 'rxjs';
+import { ALanguage } from 'src/app/services/language';
+import { LanguageFactory } from 'src/app/services/language-factory.service';
 
 @Component({
   selector: 'app-odata-querybuilder',
@@ -12,8 +14,12 @@ export class ODataQuerybuilderComponent implements OnInit, AfterViewInit {
   generatedUrl?: string;
   jsonResult: string = ""
   error?: string;
+  lg: ALanguage;
+  corsError = false;
 
-  constructor(private http: HttpClient, private renderer: Renderer2) { }
+  constructor(private http: HttpClient, private renderer: Renderer2, lFactory: LanguageFactory) {
+    this.lg = lFactory.getLanguageService();
+  }
 
   ngOnInit(): void {
   }
@@ -27,6 +33,7 @@ export class ODataQuerybuilderComponent implements OnInit, AfterViewInit {
     this.http.get<string>(this.generatedUrl + "&$top=10")
       .pipe(
         catchError((error: any) => {
+          if (error.status === 0) this.corsError = true
           this.error = error.error.error.message;
           // Handle the error here
           console.log('An error occurred:', error);

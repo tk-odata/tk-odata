@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { scheme } from '../odata-schema';
 import { QbTableComponent } from '../qb-table/qb-table.component';
+import { ALanguage } from 'src/app/services/language';
+import { LanguageFactory } from 'src/app/services/language-factory.service';
 
 @Component({
   selector: 'app-query-builder',
@@ -15,11 +17,14 @@ export class QueryBuilderComponent implements OnInit {
   selectedEntity: string | null = null;
 
   @ViewChild(QbTableComponent) tableComponent!: QbTableComponent;
+  lg: ALanguage;
 
+  constructor(lFactory: LanguageFactory) {
+    this.lg = lFactory.getLanguageService();
+  }
   onUrlChange() {
     this.urlChange.emit(this.url);
   }
-  constructor() { }
 
   ngOnInit(): void {
   }

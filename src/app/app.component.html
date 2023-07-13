@@ -1,11 +1,19 @@
 <div class="page">
     <div #header class="header">
-        <h1 class="title">OpenData Query Builder voor:
-            <a target="_blank" href="https://opendata.tweedekamer.nl/documentatie/odata-api">
-                opendata.tweedekamer.nl</a>
-        </h1>
+        <div class="header-title">
+            <h1 class="title">{{lg.header}}
+                <a target="_blank" href="https://opendata.tweedekamer.nl/documentatie/odata-api">
+                    opendata.tweedekamer.nl</a>
+            </h1>
+        </div>
+        <div class="langs">
+            <div class="lang" [ngClass]="{'selected': getLang() == 'nl'}" (click)="selectLang('nl')">Nederlands</div>
+            <div class="lang" [ngClass]="{'selected': getLang() == 'en'}" (click)="selectLang('en')">English</div>
+        </div>
     </div>
     <div #content class="content">
         <app-odata-querybuilder></app-odata-querybuilder>
+    </div>
+    <div [innerHTML]="lg.helpText">
     </div>
 </div>

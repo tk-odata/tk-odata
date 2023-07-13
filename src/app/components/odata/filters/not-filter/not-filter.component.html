@@ -1,5 +1,5 @@
 <div class="not-filter">
-    <div>Niet:</div>
+    <div>{{lg.notFilterTitle}}:</div>
     <app-qb-filter *ngIf="filterObj.notFilter; else addFilter" [filterObj]="filterObj.notFilter" [tableComp]="tableComp"
         (removeEvent)="removeFilter()" [filterBuildType]="filterObj.notFilter.filter"></app-qb-filter>
     <ng-template #addFilter>

@@ -1,13 +1,13 @@
 <div *ngIf="filterObj" class="criteria-filter">
     <select (change)=" setCritType($event)">
-        <option [selected]="filterObj.critType == op.val" [value]="op.val" *ngFor="let op of critOptions">{{op.text}}
+        <option [selected]="filterObj.critType == op.val" [value]="op.val" *ngFor="let op of critOptions">{{op.label}}
         </option>
     </select>
     <!-- Based on select but most use -->
     <div class="single-inputs">
         <select class="single-input" (change)="timeOptionChange($event)" *ngIf="filterObj.critType == 1">
-            <option [selected]="filterObj.timeOption == to.value" [value]="to.value" *ngFor="let to of getTimeOption()">
-                {{to.key}}
+            <option [selected]="filterObj.timeOption == to.val" [value]="to.val" *ngFor="let to of timeOptions">
+                {{to.label}}
             </option>
         </select>
         <!-- Prop -->
@@ -17,22 +17,23 @@
         <!-- Options -->
         <select class="single-input" (change)="operatorChange($event)"
             *ngIf="filterObj.critType == 0 || filterObj.critType == 1">
-            <option [selected]="filterObj.comparator == o.value" [value]="o.value" *ngFor="let o of getOperators()">
-                {{o.key}}</option>
+            <option [selected]="filterObj.comparator == o.val" [value]="o.val" *ngFor="let o of compareOptions">
+                {{o.label}}</option>
         </select>
         <select class="single-input" (change)="textFilterChange($event)" *ngIf="filterObj.critType == 2">
-            <option [selected]="filterObj.textOption == tf.value" [value]="tf.value"
-                *ngFor="let tf of getTextOptions()">{{tf.key}} </option>
+            <option [selected]="filterObj.textOption == tf.val" [value]="tf.val" *ngFor="let tf of textOptions">
+                {{tf.label}} </option>
         </select>
         <!-- Value -->
         <input class="value-input" [value]="filterObj.value" (change)="valueChange($event)"
-            *ngIf="filterObj.critType != 3" placeholder="Value">
+            *ngIf="filterObj.critType != 3"
+            [placeholder]="filterObj.critType != 4? lg.placeHolderInput: lg.placeHolderInputCustom">
     </div>
     <div *ngIf="filterObj.critType == 3" class="in-filter">
         <div class="in-value" *ngFor="let i of filterObj.values">
-            <input (change)="updateValue(i, $event)" [value]="i.input" placeholder="Value">
+            <input (change)="updateValue(i, $event)" [value]="i.input" [placeholder]="lg.placeHolderInput">
             <button (click)="removeInput(i)">X</button>
         </div>
-        <button (click)="addInput()">Add Input</button>
+        <button (click)="addInput()">{{lg.addInput}}</button>
     </div>
 </div>

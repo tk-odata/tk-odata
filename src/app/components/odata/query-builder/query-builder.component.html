@@ -1,8 +1,8 @@
 <div class="query-builder">
     <select (change)="onEntitySelected($event)">
-        <option disabled selected value> -- selecteer een Entity -- </option>
+        <option disabled selected value> -- {{lg.selectEntity}} -- </option>
         <option *ngFor="let option of getEntities()" [value]="option">{{ option }}</option>
     </select>
     <app-qb-table *ngIf="this.selectedEntity" [entity]="this.selectedEntity"></app-qb-table>
-    <button (click)="update()">Update Data</button>
+    <button (click)="update()">{{lg.updateDataButton}}</button>
 </div>

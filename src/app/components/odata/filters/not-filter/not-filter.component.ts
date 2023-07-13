@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseFilterDirective, FilterObj } from '../base-filter.directive';
 import { Filter, NotCriterica } from 'src/app/services/query-generator/filters';
+import { ALanguage } from 'src/app/services/language';
+import { LanguageFactory } from 'src/app/services/language-factory.service';
 
 export class NotObj extends FilterObj {
   override createFilter(): Filter | null {
@@ -19,6 +21,12 @@ export class NotObj extends FilterObj {
 })
 export class NotFilterComponent extends BaseFilterDirective<NotObj> implements OnInit {
 
+  lg: ALanguage;
+
+  constructor(lFactory: LanguageFactory) {
+    super();
+    this.lg = lFactory.getLanguageService();
+  }
 
   ngOnInit(): void {
   }

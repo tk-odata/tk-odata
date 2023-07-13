@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseFilterDirective, FilterObj } from '../base-filter.directive';
 import { Filter, CompareCriterica, TimeCriteria, TextCriteria, InCriterica, CustomCriteria, C, TF, TO } from 'src/app/services/query-generator/filters';
+import { ALanguage } from 'src/app/services/language';
+import { LanguageFactory } from 'src/app/services/language-factory.service';
 
 export class CritObj extends FilterObj {
   override createFilter(): Filter | null {
@@ -52,19 +54,61 @@ interface CritInput {
   styleUrls: ['./crit-filter.component.css']
 })
 export class CritFilterComponent extends BaseFilterDirective<CritObj> implements OnInit {
+  lg: ALanguage;
+  critOptions: { val: number; label: any; }[];
+  textOptions: { val: TF; label: any; }[];
+  timeOptions: { val: TO; label: any; }[];
+  compareOptions: { val: C; label: any; }[];
+
+  constructor(lFactory: LanguageFactory) {
+    super();
+    this.lg = lFactory.getLanguageService();
+
+    this.critOptions = [
+      { val: 0, label: this.lg.critOptionCompare },
+      { val: 1, label: this.lg.critOptionTime },
+      { val: 2, label: this.lg.critOptionText },
+      { val: 3, label: this.lg.critOptionIn },
+      { val: 4, label: this.lg.critOptionCustom }
+    ]
+
+    this.textOptions = [
+      { val: TF.Contains, label: this.lg.textOptionContains },
+      { val: TF.StartsWith, label: this.lg.textOptionStartsWith },
+      { val: TF.EndsWith, label: this.lg.textOptionEndsWith },
+    ]
+
+    this.timeOptions = [
+      { val: TO.Second, label: this.lg.textOptionSecond },
+      { val: TO.Minute, label: this.lg.textOptionMinute },
+      { val: TO.Hour, label: this.lg.textOptionHour },
+      { val: TO.Day, label: this.lg.textOptionDay },
+      { val: TO.Month, label: this.lg.textOptionMonth },
+      { val: TO.Year, label: this.lg.textOptionYear },
+    ]
+
+    this.compareOptions = [
+      { val: C.Equals, label: this.lg.compareOptionsEquals },
+      { val: C.NotEquals, label: this.lg.compareOptionsNotEquals },
+      { val: C.GreaterEqual, label: this.lg.compareOptionsGreaterEqual },
+      { val: C.GreaterThan, label: this.lg.compareOptionsGreaterThan },
+      { val: C.LowerEqual, label: this.lg.compareOptionsLowerEqual },
+      { val: C.LowerThan, label: this.lg.compareOptionsLowerThan },
+    ]
+  }
 
   ngOnInit(): void {
     if (this.filterObj.property == null) {
       this.filterObj.property = this.getProperties()[0]
     }
     if (this.filterObj.comparator == null) {
-      this.filterObj.comparator = this.getOperators()[0].value
+      this.filterObj.comparator = this.compareOptions[0].val
     }
     if (this.filterObj.textOption == null) {
-      this.filterObj.textOption = this.getTextOptions()[0].value
+      this.filterObj.textOption = this.textOptions[0].val
     }
     if (this.filterObj.timeOption == null) {
-      this.filterObj.timeOption = this.getTimeOption()[0].value
+      this.filterObj.timeOption = this.timeOptions[0].val
     }
   }
 
@@ -72,46 +116,9 @@ export class CritFilterComponent extends BaseFilterDirective<CritObj> implements
     this.filterObj.critType = event.target.value;
   }
 
-  getOperators() {
-    const enumList = [];
-    for (const key in C) {
-      if (isNaN(Number(key))) {
-        enumList.push({ key, value: C[key as keyof typeof C] });
-      }
-    }
-    return enumList;
-  }
-
-  getTextOptions() {
-    const enumList = [];
-    for (const key in TF) {
-      if (isNaN(Number(key))) {
-        enumList.push({ key, value: TF[key as keyof typeof TF] });
-      }
-    }
-    return enumList;
-  }
-
-  getTimeOption() {
-    const enumList = [];
-    for (const key in TO) {
-      if (isNaN(Number(key))) {
-        enumList.push({ key, value: TO[key as keyof typeof TO] });
-      }
-    }
-    return enumList;
-  }
-
   getProperties() {
     return this.tableComp.getAllOrderbyOptions()
   }
-  critOptions = [
-    { val: 0, text: "Compare" },
-    { val: 1, text: "Time" },
-    { val: 2, text: "Text" },
-    { val: 3, text: "In" },
-    { val: 4, text: "Custom" }
-  ]
 
   // in
   addInput() {

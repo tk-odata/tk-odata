@@ -13,4 +13,5 @@
 
 .remove-button {
     all: unset;
+    align-self: flex-start;
 }

@@ -4,6 +4,8 @@ import { FilterBuildType } from '../add-filter/add-filter.component';
 import { FilterObj } from '../filters/base-filter.directive';
 import { QBTable } from 'src/app/services/query-generator/Table';
 import { scheme, schemeBaseProperties } from '../odata-schema';
+import { ALanguage } from 'src/app/services/language';
+import { LanguageFactory } from 'src/app/services/language-factory.service';
 
 
 class TableData {
@@ -52,7 +54,10 @@ export class QbTableComponent implements OnInit {
   relationOpen = false;
   filterOpen = false;
 
-  constructor() {
+  lg: ALanguage;
+
+  constructor(lFactory: LanguageFactory) {
+    this.lg = lFactory.getLanguageService();
   }
 
   ngOnInit(): void {

@@ -1,9 +1,10 @@
 <div class="composite-filter">
     <div class="composite-selector">
-        <div>Type:</div>
+        <div>{{lg.type}}:</div>
         <select class="composite-select" (change)="updateType($event)">
-            <option [value]="'AND'" [selected]="filterObj.type == 'AND'">AND</option>
-            <option [value]="'OR'" [selected]="filterObj.type == 'OR'">OR</option>
+            <option *ngFor="let option of options" [value]="option.val" [selected]="filterObj.type == option.val">
+                {{option.label}}</option>
+
         </select>
     </div>
     <div class="filter-childs" *ngIf="filterObj.filterObjects">

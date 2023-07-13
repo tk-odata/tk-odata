@@ -6,6 +6,8 @@ import { FilterObj } from '../filters/base-filter.directive';
 import { CompObj } from '../filters/comp-filter/comp-filter.component';
 import { ListObj } from '../filters/list-filter/list-filter.component';
 import { NotObj } from '../filters/not-filter/not-filter.component';
+import { ALanguage } from 'src/app/services/language';
+import { LanguageFactory } from 'src/app/services/language-factory.service';
 
 @Component({
   selector: 'app-qb-filter',
@@ -21,8 +23,6 @@ export class QbFilterComponent implements OnInit {
   @Output() removeEvent = new EventEmitter();
   type!: string;
   @Input() filterObj!: FilterObj;
-
-  constructor() { }
 
   ngOnInit(): void {
     if (this.filterBuildType == FilterBuildType.comp) {
