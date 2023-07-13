@@ -1,0 +1,16 @@
+.filter-component {
+    border: 1px dashed black;
+    padding: 2px;
+    margin-left: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.component {
+    width: 100%;
+}
+
+.remove-button {
+    all: unset;
+}

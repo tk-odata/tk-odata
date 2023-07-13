@@ -1,0 +1,26 @@
+<div class="list-filter-component">
+    <div class="list-filter">
+        <div>
+            Type:
+        </div>
+        <select (change)="updateType($event)">
+            <option [value]="'ANY'" [selected]="filterObj.type == 'ANY'">ANY</option>
+            <option [value]="'ALL'" [selected]="filterObj.type == 'ALL'">ALL</option>
+        </select>
+        <div>
+            Relatie:
+        </div>
+        <select (change)="setRelation($event)">
+            <option [selected]="lr.name == filterObj.selectedRelation.name" *ngFor="let lr of getListRelations()"
+                [value]="lr.name">{{lr.name}}</option>
+        </select>
+    </div>
+    <div>
+        <app-qb-filter *ngIf="filterObj.listFilter; else addFilter" [filterObj]="filterObj.listFilter"
+            [tableComp]="filterObj.table" (removeEvent)="removeFilter()"
+            [filterBuildType]="filterObj.listFilter.filter"></app-qb-filter>
+        <ng-template #addFilter>
+            <app-add-filter (newFilter)="setFilterType($event)"></app-add-filter>
+        </ng-template>
+    </div>
+</div>

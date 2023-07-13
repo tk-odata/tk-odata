@@ -1,0 +1,14 @@
+<div class="composite-filter">
+    <div class="composite-selector">
+        <div>Type:</div>
+        <select class="composite-select" (change)="updateType($event)">
+            <option [value]="'AND'" [selected]="filterObj.type == 'AND'">AND</option>
+            <option [value]="'OR'" [selected]="filterObj.type == 'OR'">OR</option>
+        </select>
+    </div>
+    <div class="filter-childs" *ngIf="filterObj.filterObjects">
+        <app-qb-filter [filterObj]="f" [tableComp]="tableComp" (removeEvent)="removeFilter(f)"
+            [filterBuildType]="f.filter" *ngFor="let f of filterObj.filterObjects"></app-qb-filter>
+    </div>
+    <app-add-filter (newFilter)="addFilter($event)"></app-add-filter>
+</div>

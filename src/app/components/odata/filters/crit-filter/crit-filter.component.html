@@ -1,0 +1,38 @@
+<div *ngIf="filterObj" class="criteria-filter">
+    <select (change)=" setCritType($event)">
+        <option [selected]="filterObj.critType == op.val" [value]="op.val" *ngFor="let op of critOptions">{{op.text}}
+        </option>
+    </select>
+    <!-- Based on select but most use -->
+    <div class="single-inputs">
+        <select class="single-input" (change)="timeOptionChange($event)" *ngIf="filterObj.critType == 1">
+            <option [selected]="filterObj.timeOption == to.value" [value]="to.value" *ngFor="let to of getTimeOption()">
+                {{to.key}}
+            </option>
+        </select>
+        <!-- Prop -->
+        <select class="single-input" (change)="propertyChange($event)" *ngIf="filterObj.critType != 4">
+            <option [selected]="filterObj.property == p" [value]="p" *ngFor="let p of getProperties()">{{p}}</option>
+        </select>
+        <!-- Options -->
+        <select class="single-input" (change)="operatorChange($event)"
+            *ngIf="filterObj.critType == 0 || filterObj.critType == 1">
+            <option [selected]="filterObj.comparator == o.value" [value]="o.value" *ngFor="let o of getOperators()">
+                {{o.key}}</option>
+        </select>
+        <select class="single-input" (change)="textFilterChange($event)" *ngIf="filterObj.critType == 2">
+            <option [selected]="filterObj.textOption == tf.value" [value]="tf.value"
+                *ngFor="let tf of getTextOptions()">{{tf.key}} </option>
+        </select>
+        <!-- Value -->
+        <input class="value-input" [value]="filterObj.value" (change)="valueChange($event)"
+            *ngIf="filterObj.critType != 3" placeholder="Value">
+    </div>
+    <div *ngIf="filterObj.critType == 3" class="in-filter">
+        <div class="in-value" *ngFor="let i of filterObj.values">
+            <input (change)="updateValue(i, $event)" [value]="i.input" placeholder="Value">
+            <button (click)="removeInput(i)">X</button>
+        </div>
+        <button (click)="addInput()">Add Input</button>
+    </div>
+</div>

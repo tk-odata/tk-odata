@@ -1,0 +1,19 @@
+.composite-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.composite-selector {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.composite-select {}
+
+.filter-childs {
+    display: flex;
+    gap: 2px;
+    flex-direction: column;
+}

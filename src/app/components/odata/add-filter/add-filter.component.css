@@ -1,0 +1,13 @@
+.add-filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: 8px;
+    margin-left: 5px;
+}
+
+.ftiler-select {
+    /* width: 100px; */
+}
+
+.add-button {}

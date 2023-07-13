@@ -1,0 +1,9 @@
+<div class="add-filter">
+    <select class="filter-select" (change)="selected($event)">
+        <option value="0">and/or</option>
+        <option value="1">any/all</option>
+        <option value="2">criteria</option>
+        <option value="3">not</option>
+    </select>
+    <button class="add-button" (click)="addFilter()">+</button>
+</div>

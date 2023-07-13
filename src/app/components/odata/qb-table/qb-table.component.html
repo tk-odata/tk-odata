@@ -1,0 +1,68 @@
+<div class="table-component">
+    <div class="list-component">
+        <div class="item-title">
+            <div (click)="toggleAttributeOpen()">{{getPM(attirbuteOpen)}} Attributen</div>
+            <button *ngIf="attirbuteOpen" (click)="toggleSelectAllAttributes()">Un/select all</button>
+        </div>
+        <div *ngIf="attirbuteOpen">
+            <div class="attribute-list" *ngFor="let attribute of tableData?.attributesSelection; let i = index">
+                <div class="check-box-item">
+                    <input [id]="'attribute'+ i" (change)="changeAttributeOption(attribute, $event)" type="checkbox"
+                        [checked]="attribute.checked" />
+                    <label [for]="'attribute'+ i">{{attribute.name}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list-component">
+        <div class="item-title">
+            <div (click)="toggleRelationsOpen()">{{getPM(relationOpen)}} Relaties</div>
+        </div>
+        <div *ngIf="relationOpen">
+            <div class="relation-list" *ngFor="let relation of tableData?.relationsSelectionOptions; let i = index">
+                <div class="check-box-item">
+                    <input [id]="'relation'+ i" (change)="changeRelationsOption(relation, $event)" type="checkbox"
+                        [checked]="relation.checked" />
+                    <label [for]="'relation'+ i">{{relation.name}}</label>
+                </div>
+                <div class="table-indent">
+                    <app-qb-table [tableData]="getTableDataOfAttribute(relation)" [upperTable]="false"
+                        *ngIf="relation.checked" [relation]="relation" [entity]="relation.type!"></app-qb-table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list-component">
+        <div class="item-title">
+            <div (click)="toggleFilterOpen()">{{getPM(filterOpen)}} Filters</div>
+        </div>
+        <div *ngIf="filterOpen">
+            <!-- Everything happens inside and filter for ease -->
+            <app-qb-filter *ngIf="tableData!.filterObj; else addFilter" [filterObj]="tableData!.filterObj"
+                [tableComp]="this" (removeEvent)="removeFilter()"
+                [filterBuildType]="tableData!.filterObj.filter"></app-qb-filter>
+            <ng-template #addFilter>
+                <app-add-filter (newFilter)="setFilterType($event)"></app-add-filter>
+            </ng-template>
+        </div>
+        <div class="check-box-item">
+            <input id="countInput" [checked]="tableData?.count" (change)="setCount($event)" type="checkbox">
+            <label for="countInput">Count rows</label>
+        </div>
+        <div class="orderby-part">
+            <div>OrderBy</div>
+            <div class="orderby-input">
+                <select class="orderby-select" (change)="onOrderBySelectionChange($event)">
+                    <option [selected]="tableData?.orderByProp == 'null'" [value]="null"> -- Niet Orderen -- </option>
+                    <option [selected]="tableData?.orderByProp == option" *ngFor="let option of getAllOrderbyOptions()"
+                        [value]="option">{{option}}</option>
+                </select>
+                <div class="check-box-item">
+                    <input id="orderAscendingInput" [checked]="tableData?.orderByAscending"
+                        (change)="onOrderByAscendingChange($event)" type="checkbox">
+                    <label for="orderAscendingInput">ascending?</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

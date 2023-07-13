@@ -1,0 +1,21 @@
+<div class="page-builder">
+    <div class="url-copy">
+        <input class="url-text" [value]="this.generatedUrl" disabled />
+        <button class="url-button" (click)="copyToClipboard()">COPY</button>
+    </div>
+    <div class="segments">
+        <div class="segment" #leftSide>
+            <app-query-builder (onUpdate)="update()" [(url)]="this.generatedUrl!"></app-query-builder>
+        </div>
+        <div class="resizer" #resizer></div>
+        <div #rightSide class="segment" style="flex:1">
+            <div *ngIf="error">
+                {{error}}
+            </div>
+            DATA OUTPUT
+            <div>
+                <ngx-json-viewer *ngIf="this.jsonResult" [json]="this.jsonResult"></ngx-json-viewer>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="filter-component">
+    <div [ngSwitch]="getType()" class="component">
+        <ng-container *ngSwitchCase="'composite'">
+            <app-comp-filter [filterObj]="getCompObj()" [tableComp]="tableComp"></app-comp-filter>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'list'">
+            <app-list-filter [filterObj]="getListObj()" [tableComp]="tableComp"></app-list-filter>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'crit'">
+            <app-crit-filter [filterObj]="getCritObj()" [tableComp]="tableComp"></app-crit-filter>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'not'">
+            <app-not-filter [filterObj]="getNotObj()" [tableComp]="tableComp"></app-not-filter>
+        </ng-container>
+
+        <ng-container *ngSwitchDefault>
+            <!-- Content to display when variableName does not match any of the cases -->
+        </ng-container>
+    </div>
+    <button class="remove-button" (click)="remove()">X</button>
+</div>

@@ -1,0 +1,12 @@
+.list-filter-component {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.list-filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    gap: 8px;
+}

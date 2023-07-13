@@ -1,0 +1,50 @@
+.table-component {
+    margin-left: 3px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px
+}
+
+.list-component {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-title {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.check-box-item {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}
+
+.relation-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+
+.orderby-part {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.orderby-input {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+
+.table-indent {
+    margin-left: 20px;
+}
+
+.orderby-select {
+    max-width: 97%;
+}
