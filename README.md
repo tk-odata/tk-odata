@@ -1,3 +1,9 @@
+# Updating Pages
+Build the project `ng build --output-path docs`.  
+Create a 404 with the html so routing works `cp docs/index.html docs/404.html`.  
+or all in one line `ng build --output-path docs && cp docs/index.html docs/404.html`
+Commit all files in docs for the pages
+
 # OdataQuerybuilder
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3.
