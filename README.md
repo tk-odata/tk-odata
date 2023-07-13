@@ -1,5 +1,5 @@
 # Page location
-[Query Builder For Tweede Kamer OData API](tk-odata.github.io)
+[Query Builder For Tweede Kamer OData API](https://tk-odata.github.io)
 
 # OdataQuerybuilder
 
