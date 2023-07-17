@@ -36,6 +36,8 @@ export abstract class ALanguage {
   abstract compareOptionsLowerThan: string;
   abstract corsError: string;
   abstract helpText: string;
+  abstract tipText: string;
+  abstract showResultLabel: string;
 
   constructor() { }
 

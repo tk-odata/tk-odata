@@ -1,6 +1,8 @@
 import { ALanguage } from "../language";
 
 export class EnLangauge extends ALanguage {
+    override showResultLabel: string = "Show Results in jsonViewer? (Toggle off when page gets laggy.)";
+    override tipText: string = "Feel free to leave a tip";
     override corsError: string = `For the results to be displayed, you need to turn off CORS for: <a target="_blank" href="https://gegevensmagazijn.tweedekamer.nl/OData/v4/2.0">https://gegevensmagazijn.tweedekamer.nl/OData/v4/2.0</a>.<br/> 
     You can do this by downloading an google chrome extension like <a target="_blank" href="https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf">Allow CORS</a><br>
     You can still use the Application to build URLs`;

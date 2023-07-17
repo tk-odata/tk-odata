@@ -2,6 +2,8 @@
 import { ALanguage } from "../language";
 
 export class NlLangauge extends ALanguage {
+    override showResultLabel: string = "Weergeef Resultaten in JsonViewer? (Handig om uit te zetten, bij veel data)"
+    override tipText: string = "Voel je vrij om een fooi te geven";
     override corsError: string = `Om resultaten te kunnen zien, zul je CORS moeten uitschakelen voor: <a href="https://opendata.tweedekamer.nl/">https://opendata.tweedekamer.nl/</a>.<br/> 
     Je kunt dit o.a. doen door deze chrome extensie te downloaden: <a href="https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf">Allow CORS</a><br>
     Je kunt nog steeds de applicatie gebruiken om een url te creëren.`;
