@@ -55,7 +55,8 @@ export class NlLangauge extends ALanguage {
     override helpText: string = `Extra Hulp en Opmerkingen <br>
     <b>`+ this.attributes + `:</b> Klik op <b>` + this.unAndSelectAll + `</b> in ` + this.attributes + ` om alle waardes te zien<br/>
     <b>`+ this.relations + `:</b> Selecteer de relaties die je toegevoegd wil hebben. Opmerking: <b>` + this.filters + `</b> in een relatie filtert alleen de resultaten na de top level filter.
-    <b>`+ this.filters + `:</b> Filter de resultaten met filters. Om een tekst waarde te gebruiken sluit je deze in met quotes ('/") DOE DIT <b>NIET</b> in de <b>` + this.critOptionIn + `</b> of <b>` + this.critOptionText + `</b>. Dit is nodig zodat ook waardes als: null, false/true, nummers, data and uuids in een vergelijking gebruikt kunnen worden.<br/>
+    <b>`+ this.filters + `:</b> Filter de resultaten met filters. Om een tekst waarde te gebruiken sluit je deze in met quotes ('/") DOE DIT <b>NIET</b> in de <b>` + this.critOptionIn + `</b> of <b>` + this.critOptionText + `</b>. Dit is nodig zodat ook waardes als: null, false/true, nummers, datums and uuids in een vergelijking gebruikt kunnen worden.<br/>
+    Als je een <b>Datum</b> wil vergelijken, moet het in deze format: <i>2012-03-20T00:00:00Z</i><br/>
     Noteer ook dat maar een kleine aantal Nodes beschikbaar zijn. Dus in plaats van een lange <b>`+ this.addOptionAndOr + `</b>, gebruik <b>` + this.addOptionCriteria + " > " + this.critOptionIn + `</b> en voeg elke waarde apart toe<br/>
     <b>`+ this.updateDataButton + ` Knop: </b> Gebruik deze knop om een URL te genereren. Ook kan je de eerste 10 resultaten zien (als CORS is uitgeschakeld*)<br/ >
     Noteer ook dat het goed mogelijk is dat niet alle `+ this.attributes + ` en ` + this.relations + ` te zien zijn. Om dit op te lossen for filters kun je de ` + this.critOptionCustom + ` gebruiken. Voor andere dingen zul je zelf de url moeten aanpassen.

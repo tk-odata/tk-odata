@@ -54,7 +54,8 @@ export class EnLangauge extends ALanguage {
     override helpText: string = `Extra Help and Notes <br>
     <b>`+ this.attributes + `:</b> Click on <b>` + this.unAndSelectAll + `</b> in ` + this.attributes + ` to see them all<br/>
     <b>`+ this.relations + `:</b> Select the relations you want to expand. Also take note that <b>` + this.filters + `</b> inside a relation are only used to filter those results and will be seperate from the base ` + this.filters + `<br/>
-    <b>`+ this.filters + `:</b> Filter the entity based on your requirements. If the value is text enclose it with quotes ('/"). <b>Don't</b> do this in the In Query or Text Query This is necessary so you can use: null, false/true, numbers, dates and uuids.<br/>
+    <b>`+ this.filters + `:</b> Filter the entity based on your requirements. If the value is text enclose it with quotes ('/"). <b>Don't</b> do this in the In Query or Text Query This is necessary so you can use: null, false/true, numbers, dates and uuids.
+    <br> <b>Date</b> format should be in this format: <i>2012-03-20T00:00:00Z</i><br/>
     Also Note that limited nodes are available, so instead of chaining the <b>`+ this.addOptionAndOr + `</b>, use the <b>` + this.addOptionCriteria + " > " + this.critOptionIn + `</b> and add each value as an item.<br/>
     <b>`+ this.updateDataButton + ` Button: </b> Use this to generate the url in the top bar. It will also call a request to load in the top 10 so you can look at the data (if CORS is disabled*)<br/ >
     Also note that it might be possible that `+ this.attributes + ` and/or ` + this.relations + ` are missing. To solve this for queries, you can use the ` + this.critOptionCustom + `. For other issues you have to fiddle with the url yourself.
