@@ -35,11 +35,26 @@ export abstract class ALanguage {
   abstract compareOptionsLowerEqual: string;
   abstract compareOptionsLowerThan: string;
   abstract corsError: string;
-  abstract helpText: string;
   abstract tipText: string;
   abstract showResultLabel: string;
-
-  constructor() { }
+  abstract attributesHelp: string;
+  abstract relationsHelp: string;
+  abstract filtersHelp: string;
+  abstract updateDataButtonHelp: string;
+  abstract filtersHelpInputRestrictions: string;
+  abstract filtersHelpInputRestrictionsCompare: string;
+  abstract filtersHelpInputRestrictionsCompareText: string;
+  abstract filtersHelpInputRestrictionsCompareNumbers: string;
+  abstract filtersHelpInputRestrictionsCompareNull: string;
+  abstract filtersHelpInputRestrictionsCompareBoolean: string;
+  abstract filtersHelpInputRestrictionsCompareTime: string;
+  abstract filtersHelpInputRestrictionsCompareGuid: string;
+  abstract filtersHelpInputRestrictionsTime: string;
+  abstract filtersHelpInputRestrictionsText: string;
+  abstract filtersHelpInputRestrictionsInList: string;
+  abstract filtersHelpInputRestrictionsCustom: string;
+  abstract filtersHelpNoRestrictions: string;
+  abstract HelpTitle: string;
 
   abstract header: string
 
@@ -59,5 +74,3 @@ export abstract class ALanguage {
 
   abstract selectEntity: string
 }
-
-

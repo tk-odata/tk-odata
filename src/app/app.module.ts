@@ -13,6 +13,7 @@ import { QbFilterComponent } from './components/odata/qb-filter/qb-filter.compon
 import { QbTableComponent } from './components/odata/qb-table/qb-table.component';
 import { QueryBuilderComponent } from './components/odata/query-builder/query-builder.component';
 import { ODataQuerybuilderComponent } from './pages/odata-querybuilder/odata-querybuilder.component';
+import { HelperComponent } from './components/helper/helper.component';
 
 
 
@@ -28,7 +29,8 @@ import { ODataQuerybuilderComponent } from './pages/odata-querybuilder/odata-que
     ListFilterComponent,
     CritFilterComponent,
     NotFilterComponent,
-    BaseFilterDirective
+    BaseFilterDirective,
+    HelperComponent
   ],
   imports: [
     BrowserModule,
