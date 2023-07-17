@@ -6,9 +6,13 @@
                     opendata.tweedekamer.nl</a>
             </h1>
         </div>
-        <div class="langs">
-            <div class="lang" [ngClass]="{'selected': getLang() == 'nl'}" (click)="selectLang('nl')">Nederlands</div>
-            <div class="lang" [ngClass]="{'selected': getLang() == 'en'}" (click)="selectLang('en')">English</div>
+        <div class="extra">
+            <div class="langs">
+                <div class="lang" [ngClass]="{'selected': getLang() == 'nl'}" (click)="selectLang('nl')">Nederlands
+                </div>
+                <div class="lang" [ngClass]="{'selected': getLang() == 'en'}" (click)="selectLang('en')">English</div>
+            </div>
+            <a target="_blank" href="https://ko-fi.com/transperecy">Geef een fooi</a>
         </div>
     </div>
     <div #content class="content">
