@@ -37,3 +37,8 @@
 .lang:hover {
     background-color: #d0d0d0;
 }
+
+.extra {
+    display: flex;
+    flex-direction: column;
+}
