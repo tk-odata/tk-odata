@@ -9,6 +9,7 @@ import { LanguageFactory } from 'src/app/services/language-factory.service';
 
 
 class TableData {
+  id: string = ""; // For uniquelables
   attributesSelection: AttributeOption[] = [];
   relationsSelectionOptions: RelationOption[] = [];
   orderByProp: string = "null";
@@ -78,6 +79,7 @@ export class QbTableComponent implements OnInit {
     // only set if something new happens, so if attributes exist nothing should be added/set
     if (this.tableData == null) {
       this.tableData = new TableData()
+      this.tableData.id = this.entity;
       this.tableData.filterObj = undefined;
     } else if (this.tableData?.attributesSelection.length > 0) return
     this.tableData.entity = this.entity;
@@ -220,6 +222,7 @@ export class QbTableComponent implements OnInit {
   getTableDataOfAttribute(attribute: RelationOption) {
     if (attribute.tableData == null) {
       attribute.tableData = new TableData();
+      attribute.tableData.id = this.tableData!.id + attribute.name;
       attribute.tableData.entity = attribute.type!;
     }
     return attribute.tableData;
