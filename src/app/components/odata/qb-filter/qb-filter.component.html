@@ -20,5 +20,7 @@
             <!-- Content to display when variableName does not match any of the cases -->
         </ng-container>
     </div>
-    <button class="remove-button" (click)="remove()">X</button>
+    <div (contextmenu)="showContextMenu($event)">
+        <button class="remove-button" (click)="remove()">X</button>
+    </div>
 </div>

@@ -39,15 +39,12 @@ export class RelationOption {
   styleUrls: ['./qb-table.component.css']
 })
 export class QbTableComponent implements OnInit {
-
   @Input() entity: string = "";
   @Input() relation?: RelationOption;
   @Input() upperTable = true;
   @Output() change = new EventEmitter<QBTable>();
   @ViewChildren(QbTableComponent) tableComponents?: QueryList<QbTableComponent>;
   @ViewChildren(QbFilterComponent) filterComp!: QbFilterComponent;
-
-  filterType?: FilterBuildType;
 
   @Input() tableData?: TableData;
 
@@ -84,7 +81,6 @@ export class QbTableComponent implements OnInit {
     } else if (this.tableData?.attributesSelection.length > 0) return
     this.tableData.entity = this.entity;
     this.tableData.relation = this.relation;
-    this.filterType = undefined;
     this.attirbuteOpen = false;
     this.relationOpen = false;
     if (Object.keys(scheme).indexOf(this.entity) == -1) {
@@ -231,13 +227,16 @@ export class QbTableComponent implements OnInit {
     this.filterOpen = !this.filterOpen;
   }
   setFilterType(event: FilterObj) {
-    this.filterType = event.filter
     this.tableData!.filterObj = event;
   }
-  removeFilter() {
-    this.filterType = undefined;
-    this.tableData!.filterObj = undefined;
+  alterFilterObj(filterObj?: FilterObj) {
+    this.tableData!.filterObj = filterObj;
   }
+
+  getFilterObj(): FilterObj | undefined {
+    return this.tableData?.filterObj;
+  }
+
   onOrderBySelectionChange(event: any) {
     this.tableData!.orderByProp = event.target.value;
   }

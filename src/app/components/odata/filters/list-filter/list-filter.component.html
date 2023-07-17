@@ -17,8 +17,7 @@
     </div>
     <div>
         <app-qb-filter *ngIf="filterObj.listFilter; else addFilter" [filterObj]="filterObj.listFilter"
-            [tableComp]="filterObj.table" (removeEvent)="removeFilter()"
-            [filterBuildType]="filterObj.listFilter.filter"></app-qb-filter>
+            [tableComp]="filterObj.table" (alterFilterObj)="alterFilterObj($event)"></app-qb-filter>
         <ng-template #addFilter>
             <app-add-filter (newFilter)="setFilterType($event)"></app-add-filter>
         </ng-template>

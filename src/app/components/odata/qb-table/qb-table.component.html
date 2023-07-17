@@ -38,9 +38,8 @@
         </div>
         <div *ngIf="filterOpen">
             <!-- Everything happens inside and filter for ease -->
-            <app-qb-filter *ngIf="tableData.filterObj; else addFilter" [filterObj]="tableData.filterObj"
-                [tableComp]="this" (removeEvent)="removeFilter()"
-                [filterBuildType]="tableData.filterObj.filter"></app-qb-filter>
+            <app-qb-filter *ngIf="getFilterObj(); else addFilter" [filterObj]="getFilterObj()!" [tableComp]="this"
+                (alterFilterObj)="alterFilterObj($event)"></app-qb-filter>
             <ng-template #addFilter>
                 <app-add-filter (newFilter)="setFilterType($event)"></app-add-filter>
             </ng-template>

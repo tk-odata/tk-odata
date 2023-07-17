@@ -8,8 +8,8 @@
         </select>
     </div>
     <div class="filter-childs" *ngIf="filterObj.filterObjects">
-        <app-qb-filter [filterObj]="f" [tableComp]="tableComp" (removeEvent)="removeFilter(f)"
-            [filterBuildType]="f.filter" *ngFor="let f of filterObj.filterObjects"></app-qb-filter>
+        <app-qb-filter [filterObj]="f" [tableComp]="tableComp" (alterFilterObj)="alterFilterObj(f, $event)"
+            *ngFor="let f of filterObj.filterObjects"></app-qb-filter>
     </div>
     <app-add-filter (newFilter)="addFilter($event)"></app-add-filter>
 </div>
