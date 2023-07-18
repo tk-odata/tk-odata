@@ -1,0 +1,64 @@
+<div class="comp">
+    <p>{{lg.HelpTitle}}</p>
+    <div class="helpItems">
+        <div class="item">
+            <div class="head">
+                {{lg.attributes}}
+            </div>
+            <div class="desc" [innerHTML]="lg.attributesHelp"> </div>
+        </div>
+        <div class="item">
+            <div class="head">
+                {{lg.relations}}
+            </div>
+            <div class="desc" [innerHTML]="lg.relationsHelp"> </div>
+        </div>
+        <div class="item">
+            <div class="head">
+                {{lg.filters}}
+            </div>
+            <div class="desc">
+                <div [innerHTML]="lg.filtersHelp"></div>
+                <br>
+
+                {{lg.filtersHelpInputRestrictions}}
+                <ul>
+                    <li>{{lg.filtersHelpInputRestrictionsCompare}}
+                        <ul>
+                            <li>
+                                {{lg.filtersHelpInputRestrictionsCompareText}}
+                            </li>
+                            <li>
+                                {{lg.filtersHelpInputRestrictionsCompareNumbers}}
+                            </li>
+                            <li>
+                                {{lg.filtersHelpInputRestrictionsCompareNull}}
+                            </li>
+                            <li>
+                                {{lg.filtersHelpInputRestrictionsCompareBoolean}}
+                            </li>
+                            <li>
+                                {{lg.filtersHelpInputRestrictionsCompareTime}}
+                            </li>
+                            <li>
+                                {{lg.filtersHelpInputRestrictionsCompareGuid}}
+                            </li>
+                        </ul>
+                    </li>
+                    <li>{{lg.filtersHelpInputRestrictionsTime}}</li>
+                    <li>{{lg.filtersHelpInputRestrictionsText}}</li>
+                    <li>{{lg.filtersHelpInputRestrictionsInList}}</li>
+                    <li>{{lg.filtersHelpInputRestrictionsCustom}}</li>
+                </ul>
+                <div [innerHTML]="lg.filtersHelpNoRestrictions"></div>
+
+            </div>
+        </div>
+        <div class="item">
+            <div class="head">
+                {{lg.updateDataButton}}
+            </div>
+            <div class="desc" [innerHTML]="lg.updateDataButtonHelp"> </div>
+        </div>
+    </div>
+</div>

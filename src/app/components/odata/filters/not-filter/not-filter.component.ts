@@ -31,10 +31,10 @@ export class NotFilterComponent extends BaseFilterDirective<NotObj> implements O
   ngOnInit(): void {
   }
 
-  setFilterType(event: FilterObj) {
-    this.filterObj.notFilter = event;
+  setFilterType(filterObj: FilterObj) {
+    this.filterObj.notFilter = filterObj;
   }
-  removeFilter() {
-    this.filterObj.notFilter = undefined
+  alterFilterObj(replaceFilter?: FilterObj) {
+    this.filterObj.notFilter = replaceFilter
   }
 }

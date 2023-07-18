@@ -1,15 +1,15 @@
-<div class="table-component">
+<div class="table-component" *ngIf="tableData">
     <div class="list-component">
         <div class="item-title">
             <div (click)="toggleAttributeOpen()">{{getPM(attirbuteOpen)}} {{lg.attributes}}</div>
             <button *ngIf="attirbuteOpen" (click)="toggleSelectAllAttributes()">{{lg.unAndSelectAll}}</button>
         </div>
         <div *ngIf="attirbuteOpen">
-            <div class="attribute-list" *ngFor="let attribute of tableData?.attributesSelection; let i = index">
+            <div class="attribute-list" *ngFor="let attribute of tableData.attributesSelection; let i = index;">
                 <div class="check-box-item">
-                    <input [id]="'attribute'+ i" (change)="changeAttributeOption(attribute, $event)" type="checkbox"
-                        [checked]="attribute.checked" />
-                    <label [for]="'attribute'+ i">{{attribute.name}}</label>
+                    <input [id]="tableData.id + 'attribute'+ i" (change)="changeAttributeOption(attribute, $event)"
+                        type="checkbox" [checked]="attribute.checked" />
+                    <label [for]="tableData.id + 'attribute'+ i">{{attribute.name}}</label>
                 </div>
             </div>
         </div>
@@ -19,11 +19,11 @@
             <div (click)="toggleRelationsOpen()">{{getPM(relationOpen)}} {{lg.relations}}</div>
         </div>
         <div *ngIf="relationOpen">
-            <div class="relation-list" *ngFor="let relation of tableData?.relationsSelectionOptions; let i = index">
+            <div class="relation-list" *ngFor="let relation of tableData.relationsSelectionOptions; let i = index">
                 <div class="check-box-item">
-                    <input [id]="'relation'+ i" (change)="changeRelationsOption(relation, $event)" type="checkbox"
-                        [checked]="relation.checked" />
-                    <label [for]="'relation'+ i">{{relation.name}}</label>
+                    <input [id]="tableData.id + 'relation'+ i" (change)="changeRelationsOption(relation, $event)"
+                        type="checkbox" [checked]="relation.checked" />
+                    <label [for]="tableData.id + 'relation'+ i">{{relation.name}}</label>
                 </div>
                 <div class="table-indent">
                     <app-qb-table [tableData]="getTableDataOfAttribute(relation)" [upperTable]="false"
@@ -38,30 +38,30 @@
         </div>
         <div *ngIf="filterOpen">
             <!-- Everything happens inside and filter for ease -->
-            <app-qb-filter *ngIf="tableData!.filterObj; else addFilter" [filterObj]="tableData!.filterObj"
-                [tableComp]="this" (removeEvent)="removeFilter()"
-                [filterBuildType]="tableData!.filterObj.filter"></app-qb-filter>
+            <app-qb-filter *ngIf="getFilterObj(); else addFilter" [filterObj]="getFilterObj()!" [tableComp]="this"
+                (alterFilterObj)="alterFilterObj($event)"></app-qb-filter>
             <ng-template #addFilter>
                 <app-add-filter (newFilter)="setFilterType($event)"></app-add-filter>
             </ng-template>
         </div>
         <div class="check-box-item">
-            <input id="countInput" [checked]="tableData?.count" (change)="setCount($event)" type="checkbox">
-            <label for="countInput">{{lg.countRows}}</label>
+            <input [id]="tableData.id + 'countInput'" [checked]="tableData.count" (change)="setCount($event)"
+                type="checkbox">
+            <label [for]="tableData.id + 'countInput'">{{lg.countRows}}</label>
         </div>
         <div class="orderby-part">
             <div>{{lg.orderbyTitle}}</div>
             <div class="orderby-input">
                 <select class="orderby-select" (change)="onOrderBySelectionChange($event)">
-                    <option [selected]="tableData?.orderByProp == 'null'" [value]="null"> -- {{lg.dontOrderBy}} --
+                    <option [selected]="tableData.orderByProp == 'null'" [value]="null"> -- {{lg.dontOrderBy}} --
                     </option>
-                    <option [selected]="tableData?.orderByProp == option" *ngFor="let option of getAllOrderbyOptions()"
+                    <option [selected]="tableData.orderByProp == option" *ngFor="let option of getAllOrderbyOptions()"
                         [value]="option">{{option}}</option>
                 </select>
                 <div class="check-box-item">
-                    <input id="orderAscendingInput" [checked]="tableData?.orderByAscending"
+                    <input [id]="tableData.id + 'orderAscendingInput'" [checked]="tableData.orderByAscending"
                         (change)="onOrderByAscendingChange($event)" type="checkbox">
-                    <label for="orderAscendingInput">{{lg.orderbyAscending}}</label>
+                    <label [for]="tableData.id + 'orderAscendingInput'">{{lg.orderbyAscending}}</label>
                 </div>
             </div>
         </div>

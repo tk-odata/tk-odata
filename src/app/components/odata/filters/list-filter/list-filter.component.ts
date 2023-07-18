@@ -70,7 +70,7 @@ export class ListFilterComponent extends BaseFilterDirective<ListObj> implements
   setFilterType(event: FilterObj) {
     this.filterObj.listFilter = event;
   }
-  removeFilter() {
-    this.filterObj.listFilter = undefined
+  alterFilterObj(replaceFilter?: FilterObj) {
+    this.filterObj.listFilter = replaceFilter
   }
 }

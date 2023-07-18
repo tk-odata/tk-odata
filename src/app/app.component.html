@@ -12,12 +12,11 @@
                 </div>
                 <div class="lang" [ngClass]="{'selected': getLang() == 'en'}" (click)="selectLang('en')">English</div>
             </div>
-            <a target="_blank" href="https://ko-fi.com/transperecy">Geef een fooi</a>
+            <a target="_blank" href="https://ko-fi.com/transperecy">{{lg.tipText}}</a>
         </div>
     </div>
     <div #content class="content">
         <app-odata-querybuilder></app-odata-querybuilder>
     </div>
-    <div [innerHTML]="lg.helpText">
-    </div>
+    <app-helper></app-helper>
 </div>

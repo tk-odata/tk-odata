@@ -16,6 +16,8 @@ export class ODataQuerybuilderComponent implements OnInit, AfterViewInit {
   error?: string;
   lg: ALanguage;
   corsError = false;
+  loading = false;
+  showResult = true;
 
   constructor(private http: HttpClient, private renderer: Renderer2, lFactory: LanguageFactory) {
     this.lg = lFactory.getLanguageService();
@@ -30,9 +32,11 @@ export class ODataQuerybuilderComponent implements OnInit, AfterViewInit {
 
   getResults() {
     if (this.generatedUrl == null) return
+    this.loading = true;
     this.http.get<string>(this.generatedUrl + "&$top=10")
       .pipe(
         catchError((error: any) => {
+          this.loading = false;
           if (error.status === 0) this.corsError = true
           this.error = error.error.error.message;
           // Handle the error here
@@ -41,11 +45,16 @@ export class ODataQuerybuilderComponent implements OnInit, AfterViewInit {
         })
       )
       .subscribe((r) => {
+        this.loading = false;
         if (r != null) {
           this.jsonResult = r;
           this.error = undefined;
         }
       });
+  }
+
+  inputCheckedChange(event: any) {
+    this.showResult = event.target.checked;
   }
 
   copyToClipboard() {

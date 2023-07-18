@@ -9,15 +9,47 @@
         </div>
         <div class="resizer" #resizer></div>
         <div #rightSide class="segment" style="flex:1">
+            <div *ngIf="corsError" [innerHTML]="lg.corsError">
+            </div>
+            <div class="show-results-input">
+                <input id="showResultIpput" [checked]="showResult" (change)="inputCheckedChange($event)"
+                    type="checkbox">
+                <label for="showResultIpput">{{lg.showResultLabel}}</label>
+            </div>
             <div *ngIf="error">
                 {{error}}
             </div>
-            <div *ngIf="corsError" [innerHTML]="lg.corsError">
+            <div class="center" *ngIf="loading">
+                <div class="lds-spinner">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
             </div>
 
-            <div>
+            <div *ngIf="showResult; else requestCheck">
                 <ngx-json-viewer *ngIf="this.jsonResult" [json]="this.jsonResult"></ngx-json-viewer>
             </div>
+            <ng-template #requestCheck>
+                <div *ngIf="!loading" class="center">
+                    <div *ngIf="this.jsonResult && !this.error;">
+                        <div class="checkmark"></div>
+                    </div>
+
+                    <div *ngIf="!(this.jsonResult && !this.error) &&generatedUrl">
+                        <div class="crossmark"></div>
+                    </div>
+                </div>
+            </ng-template>
         </div>
     </div>
 </div>

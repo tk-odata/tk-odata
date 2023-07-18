@@ -9,6 +9,7 @@ import { LanguageFactory } from 'src/app/services/language-factory.service';
 
 
 class TableData {
+  id: string = ""; // For uniquelables
   attributesSelection: AttributeOption[] = [];
   relationsSelectionOptions: RelationOption[] = [];
   orderByProp: string = "null";
@@ -38,15 +39,12 @@ export class RelationOption {
   styleUrls: ['./qb-table.component.css']
 })
 export class QbTableComponent implements OnInit {
-
   @Input() entity: string = "";
   @Input() relation?: RelationOption;
   @Input() upperTable = true;
   @Output() change = new EventEmitter<QBTable>();
   @ViewChildren(QbTableComponent) tableComponents?: QueryList<QbTableComponent>;
   @ViewChildren(QbFilterComponent) filterComp!: QbFilterComponent;
-
-  filterType?: FilterBuildType;
 
   @Input() tableData?: TableData;
 
@@ -78,11 +76,11 @@ export class QbTableComponent implements OnInit {
     // only set if something new happens, so if attributes exist nothing should be added/set
     if (this.tableData == null) {
       this.tableData = new TableData()
+      this.tableData.id = this.entity;
       this.tableData.filterObj = undefined;
     } else if (this.tableData?.attributesSelection.length > 0) return
     this.tableData.entity = this.entity;
     this.tableData.relation = this.relation;
-    this.filterType = undefined;
     this.attirbuteOpen = false;
     this.relationOpen = false;
     if (Object.keys(scheme).indexOf(this.entity) == -1) {
@@ -220,6 +218,7 @@ export class QbTableComponent implements OnInit {
   getTableDataOfAttribute(attribute: RelationOption) {
     if (attribute.tableData == null) {
       attribute.tableData = new TableData();
+      attribute.tableData.id = this.tableData!.id + attribute.name;
       attribute.tableData.entity = attribute.type!;
     }
     return attribute.tableData;
@@ -228,13 +227,16 @@ export class QbTableComponent implements OnInit {
     this.filterOpen = !this.filterOpen;
   }
   setFilterType(event: FilterObj) {
-    this.filterType = event.filter
     this.tableData!.filterObj = event;
   }
-  removeFilter() {
-    this.filterType = undefined;
-    this.tableData!.filterObj = undefined;
+  alterFilterObj(filterObj?: FilterObj) {
+    this.tableData!.filterObj = filterObj;
   }
+
+  getFilterObj(): FilterObj | undefined {
+    return this.tableData?.filterObj;
+  }
+
   onOrderBySelectionChange(event: any) {
     this.tableData!.orderByProp = event.target.value;
   }
