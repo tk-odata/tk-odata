@@ -109,12 +109,12 @@ export class QbTableComponent implements OnInit {
         case "vergaderjaarType":
         case "vergaderjaar":
 
-        case "referentieType":
           this.tableData.attributesSelection.push({
             name: attribute.name,
             checked: true
           });
           break;
+        case "referentieType":
         case "referentieLiteral":
           relations[attribute.name.toLowerCase()] = {
             name: attribute.name,
